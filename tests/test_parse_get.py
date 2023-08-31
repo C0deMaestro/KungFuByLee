@@ -2,7 +2,7 @@ from parse_get import decode
 
 
 def test1_good_get():
-    http_request = open("http_requests/test1_good_get.txt", "r").read()
+    http_request = open("../http_requests/test1_good_get.txt", "r").read()
     assert decode(http_request) == {
         "type": "HTTP",
         "http_version": "1.1",
@@ -21,7 +21,7 @@ def test1_good_get():
 
 
 def test2_good_post():
-    http_request = open("http_requests/test2_good_post.txt", "r").read()
+    http_request = open("../http_requests/test2_good_post.txt", "r").read()
     assert decode(http_request) == {
         "type": "HTTP",
         "http_version": "1.1",
@@ -43,7 +43,7 @@ def test2_good_post():
 
 
 def test3_good_post_longbody():
-    http_request = open("http_requests/test3_good_post_longbody.txt", "r").read()
+    http_request = open("../http_requests/test3_good_post_longbody.txt", "r").read()
     assert decode(http_request) == {
         "type": "HTTP",
         "http_version": "1.1",

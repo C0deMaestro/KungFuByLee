@@ -1,16 +1,22 @@
-from view import *
+from functools import wraps
 import re
 
 
-def router(request):
-    path = request.get("path")
-    urlspatterns = [
-        (r"/api/v1/books/", books_home),
-        (r"/api/v1/books/\d+/", books_item),
-        (r"/api/v1/books/\d+/authors/", books_authors),
-        (r"/api/v1/categories/", categoties),
-        (r"/api/v1/books/\d+/categories/", books_categories),
-    ]
-    for url in urlspatterns:
-        if re.fullmatch(url[0], path):
-            url[1](request)
+class Router:
+    def __init__(self):
+        self.urls = []
+
+    def route_dec(self, path):
+        def func_dec(func):
+            self.urls.append((path, func))
+
+            def inner(*args, **kwargs):
+                return inner
+
+        return func_dec
+
+    def router_url(self, request):
+        path = request.get("path")
+        for url in self.urls:
+            if re.fullmatch(url[0], path):
+                return url[1]
