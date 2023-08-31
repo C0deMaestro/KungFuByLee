@@ -1,4 +1,3 @@
-from parse_get import decode
 from view import *
 import re
 def router(request):
