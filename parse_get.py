@@ -10,7 +10,7 @@ def decode(http_request):
             last_indx = indx
             break
         k, v = header.split(":")
-        headers.append([k,v.strip()])
+        headers.append([k, v.strip()])
 
     request = {
         "type": type,
