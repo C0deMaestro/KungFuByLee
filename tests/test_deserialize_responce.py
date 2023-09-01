@@ -1,38 +1,29 @@
-import json
+import pytest
 from view import *
 
-
-def test1():
-    json = '{"key": "value"}'
+@pytest.mark.parametrize("json_input,http_dct",
+                         [('{"key": "value"}', {'key': 'value'}),
+                          ('{"name": "John"}', {'name': 'John'}),
+                          ('{"numbers": [1, 2, 3]}', {'numbers': [1, 2, 3]}),
+                          ])
+def test_deseriallize_succes(json_input,http_dct):
     expected = (
         "HTTP/1.1 200 OK\r\n"
-        "Content-Length: 1\r\n"
+        f"Content-Length: {len(http_dct)}\r\n"
         "Content-Type: application/json\r\n"
         "\r\n"
-        "{'key': 'value'}"
+        f"{http_dct}"
     )
-    assert deserialize(json) == expected
+    assert deserialize(json_input) == expected
 
 
-def test2():
-    json = '{"name": "John"}'
+def test_deseriallize_fail():
+    json_input = '{}'
     expected = (
         "HTTP/1.1 200 OK\r\n"
-        "Content-Length: 1\r\n"
+        f"Content-Length: {1}\r\n"
         "Content-Type: application/json\r\n"
         "\r\n"
-        "{'name': 'John'}"
+        '{"key": "value"}'
     )
-    assert deserialize(json) == expected
-
-
-def test3():
-    json = '{"numbers": [1, 2, 3]}'
-    expected = (
-        "HTTP/1.1 200 OK\r\n"
-        "Content-Length: 1\r\n"
-        "Content-Type: application/json\r\n"
-        "\r\n"
-        "{'numbers': [1, 2, 3]}"
-    )
-    assert deserialize(json) == expected
+    assert deserialize(json_input) != expected
