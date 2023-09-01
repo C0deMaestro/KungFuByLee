@@ -18,10 +18,9 @@ def decode(http_request):
         "method": method,
         "path": raw_path.split("?")[0],
         "raw_path": raw_path,
-        "headers": [headers],
+        "headers": headers,
     }
-
-    if len(rows) > last_indx + 2:
+    if len(rows) > last_indx + 2 and last_indx != 0:
         body = []
         for body_str in rows[last_indx + 2 :]:
             if body_str.strip():
@@ -31,3 +30,4 @@ def decode(http_request):
         request["body"] = body
 
     return request
+
