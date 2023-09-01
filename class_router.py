@@ -9,8 +9,10 @@ class Router:
     def route_dec(self, path):
         def func_dec(func):
             self.urls.append((path, func))
-            def inner(*args,**kwargs):
-                return func()
+            @wraps(func)
+            def inner(*args, **kwargs):
+                result = func(*args, **kwargs)
+                return result
             return inner
         return func_dec
 
