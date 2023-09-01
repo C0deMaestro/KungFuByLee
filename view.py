@@ -6,7 +6,7 @@ app = Router()
 
 def deserialize(responce):
     response_dct = json.loads(responce)
-    #response_dct = responce
+    # response_dct = responce
     http_response = (
         "HTTP/1.1 200 OK\r\n"
         "Content-Length: {}\r\n"

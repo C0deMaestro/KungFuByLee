@@ -1,6 +1,7 @@
 import json
 from view import *
 
+
 def test1():
     json = '{"key": "value"}'
     expected = (
@@ -12,6 +13,7 @@ def test1():
     )
     assert deserialize(json) == expected
 
+
 def test2():
     json = '{"name": "John"}'
     expected = (
@@ -22,6 +24,7 @@ def test2():
         "{'name': 'John'}"
     )
     assert deserialize(json) == expected
+
 
 def test3():
     json = '{"numbers": [1, 2, 3]}'
