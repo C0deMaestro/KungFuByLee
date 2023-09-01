@@ -1,6 +1,7 @@
 def decode(http_request):
+    http_request = http_request.decode()
     rows = http_request.split("\n")
-    method, raw_path, req_params = rows[0].split()
+    method, raw_path, req_params = rows[0].strip().split()
     type, http_version = req_params.split("/")
 
     headers = []
@@ -9,7 +10,7 @@ def decode(http_request):
         if not header.strip():
             last_indx = indx
             break
-        k, v = header.split(":")
+        k, v = header.split(":",1)
         headers.append([k, v.strip()])
 
     request = {

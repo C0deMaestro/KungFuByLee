@@ -22,4 +22,4 @@ class Router:
         path = request.get("path")
         for url in self.urls:
             if re.fullmatch(url[0], path):
-                return url[1]
+                return url[1]()

@@ -4,9 +4,8 @@ import json
 app = Router()
 
 
-def deserialize(responce):
-    response_dct = json.loads(responce)
-    # response_dct = responce
+def deserialize(response_dct):
+    response_dct = json.dumps(response_dct)
     http_response = (
         "HTTP/1.1 200 OK\r\n"
         "Content-Length: {}\r\n"
@@ -14,29 +13,35 @@ def deserialize(responce):
         "\r\n"
         "{}"
     ).format(len(response_dct), response_dct)
+
     return http_response
 
 
 @app.route_dec("/api/v1/books/")
-def books_home(request):
-    print("books_home")
+def books_home():
+    dct = {1:"tolstoy",2:"dostoevski"}
+    return dct
 
 
 @app.route_dec(r"/api/v1/books/\d+/")
-def books_item(request):
-    print("books_item")
+def books_item():
+    dct = {123: "kniga_123", 345: "kniga_345"}
+    return dct
 
 
 @app.route_dec(r"/api/v1/books/\d+/authors/")
-def books_authors(request):
-    print("books_authors")
+def books_authors():
+    dct = {"kniga_345": "author is sesenin"}
+    return dct
 
 
 @app.route_dec("/api/v1/categories/")
-def categories(request):
-    print("categories")
+def categories():
+    dct = {1: "tolstushki", 2: "anal", 3:"brother and mom and sister"}
+    return dct
 
 
 @app.route_dec(r"/api/v1/books/\d+/categories/")
-def books_categories(request):
-    print("books_categories")
+def books_categories():
+    dct = {"kniga po nomeru": "category"}
+    return dct
