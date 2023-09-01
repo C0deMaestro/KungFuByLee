@@ -33,7 +33,7 @@ def books_authors(request):
 
 
 @app.route_dec("/api/v1/categories/")
-def categoties(request):
+def categories(request):
     print("categories")
 
 

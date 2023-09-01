@@ -12,7 +12,6 @@ class Router:
 
             @wraps(func)
             def inner(*args, **kwargs):
-
                 return func(*args, **kwargs)
 
             return inner
