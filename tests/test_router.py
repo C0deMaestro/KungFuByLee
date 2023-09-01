@@ -5,15 +5,15 @@ import pytest
 @pytest.mark.parametrize(
     "test_input,expected",
     [
-        (app.router_url({"path": "/api/v1/books/"}).__name__, books_home.__name__),
-        (app.router_url({"path": "/api/v1/books/1337/"}).__name__, books_item.__name__),
-        (app.router_url({"path": "/api/v1/books/1337/authors/"}).__name__,books_authors.__name__),
-        (app.router_url({"path": "/api/v1/categories/"}).__name__, categories.__name__),
-        (app.router_url({"path": "/api/v1/books/1337/categories/"}).__name__,books_categories.__name__),
+        ("/api/v1/books/", books_home),
+        ("/api/v1/books/1337/", books_item),
+        ("/api/v1/books/1337/authors/",books_authors),
+        ("/api/v1/categories/", categories),
+        ("/api/v1/books/1337/categories/",books_categories),
     ],
 )
-def test1(test_input, expected):
-    assert test_input == expected
+def test_router_url__success(test_input, expected):
+    assert app.router_url({"path":test_input}).__name__ == expected.__name__
 
-def test2_negative():
+def test_router_url__fail():
     assert app.router_url({"path": "/api/v1/books/"}).__name__ != books_item.__name__
