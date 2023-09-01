@@ -10,11 +10,9 @@ def start_server(host='', port=8080):
             conn, addr = s.accept()
             # start new thread??
             with conn:
-                print('Connected by', addr)
                 data = conn.recv(1024)
-                decoding = decode(data)
-                dct= app.router_url(decoding)
-                print(dct)
-                response = deserialize(dct)
-                conn.sendall(response.encode())
+                decoding = decode(data)#получаем правильный словарь с данными
+                dct = app.router_url(decoding)#вызываем функцию по path который получили, вернем просто словарь в формате json
+                response = deserialize(dct)#преобразуем словарь в http ответ и закодируем его в байты
+                conn.sendall(response)#отправим
 start_server()
